@@ -28,19 +28,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
     });
   }
 
-  // hitTextRan() {
-  //   var list = [
-  //     'Продаю кота из Дагестана',
-  //     'КТРК канал делает скиндку по 8% с 10 марта по 15 марта ',
-  //     'НТС дарит скидку всем кто берет реклмаму с 1 го по 5',
-  //     'Весна пришла пора релкаму рибуить',
-  //     'выходной'
-  //   ];
-  //   final _random = Random();
-
-  //   var element = list[_random.nextInt(list.length)];
-  // }
-
   @override
   Widget build(BuildContext context) {
     var list = [
@@ -79,12 +66,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: AppColors.white,
-                                // shape:const RoundedRectangleBorder(
-                                // side: BorderSide(
-                                //   width: 2,
-                                //   color: AppColors.white,
-                                // ),
-                                // ),
                               ),
                               onPressed: () {},
                               child: Text(
@@ -97,23 +78,17 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   Column(
                     children: [
                       Container(
-                        width: 200,
+                        width: 190,
                         height: 5,
                         color: AppColors.white,
                       ),
                       SizedBox(
-                          width: 200,
+                          width: 190,
                           height: 50,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: AppColors.white,
-                                // shape:const RoundedRectangleBorder(
-                                // side: BorderSide(
-                                //   width: 2,
-                                //   color: AppColors.white,
-                                // ),
-                                // ),
                               ),
                               onPressed: () {
                                 Navigator.push(
@@ -136,11 +111,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   AppImages.logo,
                 ),
               ),
-              // Image.asset(
-              //   AppImages.logo,
-              //   width: 100,
-              //   height: 100,
-              // ),
               Center(
                 child: Container(
                   width: 390,

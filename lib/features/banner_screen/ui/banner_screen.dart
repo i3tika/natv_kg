@@ -71,23 +71,17 @@ class _BannerScreenState extends State<BannerScreen> {
                 Column(
                   children: [
                     Container(
-                      width: 200,
+                      width: 190,
                       height: 5,
                       color: AppColors.white,
                     ),
                     SizedBox(
-                        width: 200,
+                        width: 190,
                         height: 50,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               elevation: 0,
                               backgroundColor: AppColors.white,
-                              // shape:const RoundedRectangleBorder(
-                              // side: BorderSide(
-                              //   width: 2,
-                              //   color: AppColors.white,
-                              // ),
-                              // ),
                             ),
                             onPressed: () {
                               Navigator.push(
@@ -178,15 +172,13 @@ class _BannerScreenState extends State<BannerScreen> {
                         ).copyWith(color: Colors.grey),
                       ),
                     ),
-                    if (pickedfile != null)
-                      SizedBox(
-                          width: 300,
-                          height: 300,
-                          child: Image.file(fileToDisplay!)),
                   ],
                 ),
               ),
             ),
+            if (pickedfile != null)
+              SizedBox(
+                  width: 300, height: 300, child: Image.file(fileToDisplay!)),
           ],
         ),
       ),
