@@ -97,12 +97,12 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   Column(
                     children: [
                       Container(
-                        width: 200,
+                        width: 190,
                         height: 5,
                         color: AppColors.white,
                       ),
                       SizedBox(
-                          width: 200,
+                          width: 190,
                           height: 50,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
