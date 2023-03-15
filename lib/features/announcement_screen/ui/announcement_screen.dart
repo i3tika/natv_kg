@@ -8,6 +8,8 @@ import 'package:natv_kg/core_data/ui/theme/app_fonts.dart';
 import 'package:natv_kg/resources/resources.dart';
 
 import '../../../core_data/ui/common_widgets/circle_avatar_widget.dart';
+import '../../../core_data/ui/common_widgets/container_succes_widget.dart';
+import '../../../core_data/ui/common_widgets/registation_textfield_widget.dart';
 import '../../banner_screen/ui/banner_screen.dart';
 
 class AnnouncementScreen extends StatefulWidget {
@@ -204,9 +206,36 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
+               const SizedBox(
+                height: 15,
+              ),
+              const RegistrationTextField(
+                title: 'КОНТАКТНЫЙ НОМЕР',
+                number: 'Пример : 0770314004',
+              ),
+              const RegistrationTextField(
+                title: 'E-MAIL',
+                number: 'primer@gmail.com',
+              ),
+              const RegistrationTextField(
+                title: 'УКАЖИТЕ ФИО',
+                number: 'ФИО / НАЗВАНИЕ ОРГАНИЗАЦИИ',
+              ),
+              const Padding(
+                padding: EdgeInsets.only(
+                  left: 10, top: 10
+                ),
+                child: Text(
+                    '*Поля не обязательны для заполнения. Укажите номер \nтелефона и мы отправим Вам код для оплаты SMS \nсообщением.\n*Оплатите любым удобным способом'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ContainerSuccesWidget(title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',)
             ],
           ),
+          
         ),
       ),
     );
