@@ -7,6 +7,7 @@ import 'package:natv_kg/core_data/ui/theme/app_colors.dart';
 import 'package:natv_kg/core_data/ui/theme/app_fonts.dart';
 import 'package:natv_kg/resources/resources.dart';
 
+import '../../../core_data/ui/common_widgets/ElevatedButtonChanel.dart';
 import '../../../core_data/ui/common_widgets/circle_avatar_widget.dart';
 import '../../banner_screen/ui/banner_screen.dart';
 
@@ -204,7 +205,10 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Center(
+                child: ElevatedButtonChanel(),
+              ),
             ],
           ),
         ),

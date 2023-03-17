@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:natv_kg/features/announcement_screen/ui/announcement_screen.dart';
 
+import '../../../core_data/ui/common_widgets/ElevatedButtonChanel.dart';
 import '../../../core_data/ui/theme/app_colors.dart';
 import '../../../core_data/ui/theme/app_fonts.dart';
 import '../../../resources/resources.dart';
@@ -186,6 +187,12 @@ class _BannerScreenState extends State<BannerScreen> {
                   ],
                 ),
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: ElevatedButtonChanel(),
             ),
           ],
         ),
