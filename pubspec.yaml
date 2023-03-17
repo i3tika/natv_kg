@@ -39,6 +39,7 @@ dependencies:
   spider: ^4.2.0
   file_picker: ^5.2.6
   flutter_bloc: ^8.1.2
+  syncfusion_flutter_datepicker: ^20.4.54
 
 dev_dependencies:
   flutter_test:
