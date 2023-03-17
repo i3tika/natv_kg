@@ -151,7 +151,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'ВВЕДИТЕ ТЕКСТ ОБЪЯВЛЕНИЯ',
                         style: AppFonts.w100s14,
                       ),
@@ -201,6 +201,109 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                     CircleAvatarWidget(
                       title: 'Оплатите объявление!',
                       intNumber: '3',
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'ВЫБОР КАНАЛОВ ',
+                      style: TextStyle(color: Colors.red, fontSize: 25),
+                    ),
+                    SizedBox(height: 15),
+                    SingleChildScrollView(
+                      child: Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: 15,
+                          itemBuilder: ((context, index) => Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 15),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 140,
+                                          height: 70,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1.0),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10.0))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(18.0),
+                                            child: Image.asset(
+                                              ('assets/images/nts.png'),
+                                              width: 80,
+                                              height: 40,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        const Text(
+                                          "НТС",
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 15),
+                                    SizedBox(
+                                      height: 45,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          suffixIcon: IconButton(
+                                            onPressed: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        const AlertDialog(
+                                                  actions: [
+                                                    //Calendar(),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                            icon: const Icon(
+                                              Icons.calendar_month,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          border: const OutlineInputBorder(),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    const Text(
+                                      '0.0',
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 1,
+                                      color: Colors.grey,
+                                    )
+                                  ],
+                                ),
+                              )),
+                        ),
+                      ),
                     ),
                   ],
                 ),
