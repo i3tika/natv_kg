@@ -127,6 +127,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                 style: AppFonts.w400s14
                                     .copyWith(color: AppColors.black),
                               ))),
+                      Text('data'),
                     ],
                   ),
                 ],
