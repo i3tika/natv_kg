@@ -125,7 +125,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                               child: Text(
                                 'Размещение баннерной рекламы',
                                 style: AppFonts.w400s14
-                                    .copyWith(color: AppColors.red),
+                                    .copyWith(color: AppColors.black),
                               ))),
                     ],
                   ),
