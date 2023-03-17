@@ -153,7 +153,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'ВВЕДИТЕ ТЕКСТ ОБЪЯВЛЕНИЯ',
+                        'ВВЕДИТЕ ТЕКСТ ОБЪЯВЛЕНИЯ ',
                         style: AppFonts.w100s14,
                       ),
                       Text(
