@@ -183,7 +183,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: Column(
-                  children: const [
+                  children: [
                     CircleAvatarWidget(
                       title: 'Введите текст вашего объявления',
                       intNumber: '1',
@@ -209,6 +209,36 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               Center(
                 child: ElevatedButtonChanel(),
               ),
+              // ElevatedButtonChanel(
+              //   (Text
+              //     'РАЗМЕСТИТЬ ЕЩЕ ОБЪЯВЛЕНИЕ',
+              //     style: AppFonts.w100s14.copyWith(color: AppColors.white),
+              //   )),
+              // ElevatedButtonChanel(
+              // (Text
+              //   'ИЛИ РАЗМЕСТИТЬ БАННЕРНУЮ РЕКЛАМУ',
+              //   style: AppFonts.w100s14.copyWith(color: AppColors.white),
+              // )),
+              // (Text
+              //   'ЗАЯВКА ЗАРЕГИСТРИРОВАНА',
+              //   style: AppFonts.w400s30.copyWith(color: AppColors.red
+              // ),
+              //   (Text
+              //   'Вы успешно зарегистрировали заявку на размещение бегущей строки. Вам необходимо запомнить или записать код оплаты, сумму к оплате, срок до которого необходимо оплатить и внести оплату любым удобным для Вас способом.',
+              //   style: AppFonts.w400s14.copyWith(color: AppColors.black
+              // ),
+              //   (Text
+              //   'Вы успешно зарегистрировали заявку на размещение бегущей строки. Вам необходимо запомнить или записать код оплаты, сумму к оплате, срок до которого необходимо оплатить и внести оплату любым удобным для Вас способом.',
+              //   style: AppFonts.w400s14.copyWith(color: AppColors.black
+              // ),
+              //   (Text
+              //   'СТОИМОСТЬ ОБЪЯВЛЕНИЯ',
+              //   style: AppFonts.w400s18.copyWith(color: AppColors.black
+              // ),
+              //   (Text
+              //   'Оплатить необходимо сумму не менее указанной стоимости заявки. В случае, если сумма к оплате будет меньше, заявка не будет размещена.',
+              //   style: AppFonts.w400s12.copyWith(color: AppColors.grey
+              // ),
             ],
           ),
         ),
