@@ -72,12 +72,12 @@ class _BannerScreenState extends State<BannerScreen> {
                 Column(
                   children: [
                     Container(
-                      width: 200,
+                      width: 190,
                       height: 5,
                       color: AppColors.white,
                     ),
                     SizedBox(
-                        width: 200,
+                        width: 190,
                         height: 50,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -107,12 +107,12 @@ class _BannerScreenState extends State<BannerScreen> {
                 Column(
                   children: [
                     Container(
-                      width: 200,
+                      width: 190,
                       height: 5,
                       color: AppColors.red,
                     ),
                     SizedBox(
-                        width: 200,
+                        width: 190,
                         height: 50,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(

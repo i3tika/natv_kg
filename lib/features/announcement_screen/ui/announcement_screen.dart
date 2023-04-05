@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natv_kg/core_data/ui/theme/app_colors.dart';
 import 'package:natv_kg/core_data/ui/theme/app_fonts.dart';
+import 'package:natv_kg/features/announcement_screen/channel_list_bloc/channel_list_bloc.dart';
 import 'package:natv_kg/resources/resources.dart';
 
 import '../../../core_data/ui/common_widgets/ElevatedButtonChanel.dart';
@@ -69,7 +71,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   Column(
                     children: [
                       Container(
-                        width: 200,
+                        width: 190,
                         height: 5,
                         color: AppColors.red,
                       ),
@@ -98,12 +100,12 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   Column(
                     children: [
                       Container(
-                        width: 200,
+                        width: 190,
                         height: 5,
                         color: AppColors.white,
                       ),
                       SizedBox(
-                          width: 200,
+                          width: 190,
                           height: 50,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -206,9 +208,58 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   ],
                 ),
               ),
-              Center(
-                child: ElevatedButtonChanel(),
-              ),
+
+              // Center(
+              //   child: SizedBox(
+              //     width: double.infinity,
+              //     height: 150,
+              //     child: BlocBuilder<ChannelListBloc, ChannelListState>(
+              //       builder: (context, state) {
+              //         if (state is ChannelListSuccess) {
+              //           return ListView.builder(
+              //             itemCount: 5,
+              //             shrinkWrap: true,
+              //             itemBuilder: (BuildContext context, int index) {
+              //               return Container(
+              //                 width: 300,
+              //                 height: 100,
+              //                 color: AppColors.darken,
+              //                 child: Padding(
+              //                   padding: const EdgeInsets.all(16.0),
+              //                   child: Column(
+              //                     crossAxisAlignment: CrossAxisAlignment.start,
+              //                     children: [
+              //                       Row(
+              //                         children: [
+              //                           Image.network(
+              //                             AppImages.logo,
+              //                             width: 100,
+              //                             height: 65,
+              //                           ),
+              //                           const SizedBox(
+              //                             width: 15,
+              //                           ),
+              //                           // Text(
+              //                           //     state.models[index].channelName ?? ''),
+              //                         ],
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 ),
+              //               );
+              //             },
+              //           );
+              //         }
+              //         return Center(
+              //           child: Text('404'),
+              //         );
+              //       },
+              //     ),
+              //   ),
+              // // ),
+              // Center(
+              //   child: ElevatedButtonChanel(),
+              // ),
               // ElevatedButtonChanel(
               //   (Text
               //     'РАЗМЕСТИТЬ ЕЩЕ ОБЪЯВЛЕНИЕ',
