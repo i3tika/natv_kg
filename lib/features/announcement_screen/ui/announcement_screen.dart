@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:intl/intl.dart';
 import 'package:natv_kg/core_data/ui/theme/app_colors.dart';
 import 'package:natv_kg/core_data/ui/theme/app_fonts.dart';
 import 'package:natv_kg/resources/resources.dart';
@@ -19,6 +20,7 @@ class AnnouncementScreen extends StatefulWidget {
 
 class _AnnouncementScreenState extends State<AnnouncementScreen> {
   final textController = TextEditingController();
+  TextEditingController controllerDate = TextEditingController();
 
   int charLength = 0;
 
@@ -28,6 +30,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
     });
   }
 
+  DateTime selectDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     var list = [
@@ -174,7 +177,56 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Center(
+                child: TextButton(
+                  onPressed: () async {
+                    final DateTime? dateTime = await showDatePicker(
+                        context: context,
+                        initialDate: selectDate,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(3000));
+                        
+                    if (dateTime != null) {
+                      setState(() {
+                        selectDate = dateTime;
+                      });
+                    }
+                  },
+                  child: Text('${selectDate.day}'),
+                ),
+              ),
+              Center(
+                child: TextButton(
+                  onPressed: () async {
+                 
+                  },
+                  child: Text('multi'),
+                ),
+              ),
+              
+              // Center(
+              //   child: TextField(
+              //     controller: controllerDate,
+              //     decoration: const InputDecoration(
+              //       icon: Icon(Icons.calendar_month_rounded),
+              //       // labelText: dateTime,
+              //     ),
+              //     onTap: () async {
+              //       DateTime? pickedddate = await showDatePicker(
+              //           context: context,
+              //           initialDate: DateTime.now(),
+              //           firstDate: DateTime(2000),
+              //           lastDate: DateTime(2050));
+              //       // DateTime now = DateTime.now();
+              //       if (pickedddate != null) {
+              //         setState(() {
+              //           controllerDate..text = DateFormat('sdsda').format(now);
+              //         });
+              //       }
+              //     },
+              //   ),
+              // )
             ],
           ),
         ),
