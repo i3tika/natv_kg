@@ -3,14 +3,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natv_kg/core_data/ui/theme/app_colors.dart';
 import 'package:natv_kg/core_data/ui/theme/app_fonts.dart';
+import 'package:natv_kg/features/announcement_screen/calculate_bloc/calculate_bloc.dart';
+import 'package:natv_kg/features/announcement_screen/rick_and_morty_bloc/rick_morty_bloc.dart';
 import 'package:natv_kg/resources/resources.dart';
 
+import '../../../core_data/ui/common_widgets/channel_list_container.dart';
 import '../../../core_data/ui/common_widgets/circle_avatar_widget.dart';
 import '../../../core_data/ui/common_widgets/container_succes_widget.dart';
 import '../../../core_data/ui/common_widgets/registation_textfield_widget.dart';
 import '../../banner_screen/ui/banner_screen.dart';
+import '../channel_list_bloc/channel_list_bloc.dart';
 
 class AnnouncementScreen extends StatefulWidget {
   const AnnouncementScreen({super.key});
@@ -21,7 +26,7 @@ class AnnouncementScreen extends StatefulWidget {
 
 class _AnnouncementScreenState extends State<AnnouncementScreen> {
   final textController = TextEditingController();
-
+  bool _expanded = true;
   int charLength = 0;
 
   _onChanged(String value) {
@@ -29,19 +34,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
       charLength = value.length;
     });
   }
-
-  // hitTextRan() {
-  //   var list = [
-  //     'Продаю кота из Дагестана',
-  //     'КТРК канал делает скиндку по 8% с 10 марта по 15 марта ',
-  //     'НТС дарит скидку всем кто берет реклмаму с 1 го по 5',
-  //     'Весна пришла пора релкаму рибуить',
-  //     'выходной'
-  //   ];
-  //   final _random = Random();
-
-  //   var element = list[_random.nextInt(list.length)];
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +47,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
     final _random = Random();
 
     var element = list[_random.nextInt(list.length)];
+    BlocProvider.of<RickMortyBloc>(context).add(GetRickMortyEvent());
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -184,30 +177,107 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: Column(
-                  children: const [
-                    CircleAvatarWidget(
+                  children: [
+                    const CircleAvatarWidget(
                       title: 'Введите текст вашего объявления',
                       intNumber: '1',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    CircleAvatarWidget(
+                    const CircleAvatarWidget(
                       title:
                           'Выберите телеканалы и даты,\nи нажмите "Разместить объявление"',
                       intNumber: '2',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    CircleAvatarWidget(
+                    const CircleAvatarWidget(
                       title: 'Оплатите объявление!',
                       intNumber: '3',
+                    ),
+                    const SizedBox(height: 15,),
+                    // const RegistrationTextField(
+                    //   title: 'сколько дней',
+                    //   number: '',
+                    // ),
+                    // TextButton(
+                    //     onPressed: () {
+                    //       BlocProvider.of<CalculateBloc>(context).add(
+                    //           GetCalculateEvent(
+                    //               channelId: 2,
+                    //               daysCount: 5,
+                    //               text: textController.text));
+                    //     },
+                    //     child: Text('success')),
+                    // BlocBuilder<CalculateBloc, CalculateState>(
+                    //   builder: (context, state) {
+                    //     if (state is CalculateSuccess) {
+                    //       print(state.data.price);
+                    //       return Text(state.data.price.toString());
+                    //     }
+                    //     return SizedBox.shrink();
+                    //   },
+                    // ),
+                    AnimatedContainer(
+                      duration: const Duration(microseconds: 500),
+                      height: _expanded ? 300 : 750,
+                      width: 500,
+                      child: BlocBuilder<RickMortyBloc, RickMortyState>(
+                          builder: (context, state) {
+                        if (state is RickMortySuccess) {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 15,
+                              itemBuilder: (context, index) =>
+                                  ChannelListContainer(
+                                    channelName:
+                                        state.model.results?[index].name ?? '',
+                                    logo:
+                                        state.model.results?[index].image ?? '',
+                                    id: state.model.results?[index].id ?? 0,
+                                  )
+                              //  ChannelList(
+                              //     name: state.model.results?[index].name ?? '',
+                              //     images:
+                              //         state.model.results?[index].image ?? '')
+                              );
+                        }
+                        return const Center(
+                          child: Text(
+                            'not found',
+                            style: TextStyle(color: AppColors.red),
+                          ),
+                        );
+                      }),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: 400,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            setState(
+                              () {
+                                _expanded = !_expanded;
+                              },
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                          ),
+                          child: const Text(
+                            'БОЛЬШЕ КАНАЛОВ',
+                            style: AppFonts.w500s25,
+                          )),
                     ),
                   ],
                 ),
               ),
-               const SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               const RegistrationTextField(
@@ -223,19 +293,18 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                 number: 'ФИО / НАЗВАНИЕ ОРГАНИЗАЦИИ',
               ),
               const Padding(
-                padding: EdgeInsets.only(
-                  left: 10, top: 10
-                ),
+                padding: EdgeInsets.only(left: 10, top: 10),
                 child: Text(
                     '*Поля не обязательны для заполнения. Укажите номер \nтелефона и мы отправим Вам код для оплаты SMS \nсообщением.\n*Оплатите любым удобным способом'),
               ),
               const SizedBox(
                 height: 10,
               ),
-              ContainerSuccesWidget(title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',)
+              ContainerSuccesWidget(
+                title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
+              ),
             ],
           ),
-          
         ),
       ),
     );
