@@ -12,15 +12,15 @@ class ContainerSuccesWidget extends StatelessWidget {
     return Container(
         width: double.infinity,
         height: 250,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.red,
         ),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Text(
+            const Text(
               'Вам остался один шаг - нажмите разместить и\n получите код для оплаты! ',
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,

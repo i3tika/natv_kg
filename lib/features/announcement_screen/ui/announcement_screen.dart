@@ -153,7 +153,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'ВВЕДИТЕ ТЕКСТ ОБЪЯВЛЕНИЯ',
                         style: AppFonts.w100s14,
                       ),
@@ -232,7 +232,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               const SizedBox(
                 height: 10,
               ),
-              ContainerSuccesWidget(title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',)
+              const ContainerSuccesWidget(title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',)
             ],
           ),
           

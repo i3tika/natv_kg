@@ -8,4 +8,13 @@ abstract class AppFonts {
       fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.white);
     static const TextStyle w400s20 = TextStyle(
       fontSize: 20, fontWeight: FontWeight.w500, color: AppColors.white);
+      static const TextStyle w400s30 = TextStyle(
+      fontSize: 30, fontWeight: FontWeight.w400, color: AppColors.white);
+      static const TextStyle w300s20 = TextStyle(
+      fontSize: 20, fontWeight: FontWeight.w300, color: AppColors.white);
+      static const TextStyle w400s18 = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.w400, color: AppColors.white);
+       static const TextStyle w100s12 = TextStyle(
+      fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.white);
+      
 }
