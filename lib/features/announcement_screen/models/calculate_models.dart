@@ -1,8 +1,8 @@
 class CalculateModels {
   int? channelId;
   int? daysCount;
-  int? price;
-  int? priceWithDiscount;
+  double? price;
+  double? priceWithDiscount;
   String? text;
 
   CalculateModels(

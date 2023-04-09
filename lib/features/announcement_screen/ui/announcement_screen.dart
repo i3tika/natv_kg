@@ -7,15 +7,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natv_kg/core_data/ui/theme/app_colors.dart';
 import 'package:natv_kg/core_data/ui/theme/app_fonts.dart';
 import 'package:natv_kg/features/announcement_screen/calculate_bloc/calculate_bloc.dart';
+import 'package:natv_kg/features/announcement_screen/models/models.dart';
 import 'package:natv_kg/features/announcement_screen/rick_and_morty_bloc/rick_morty_bloc.dart';
 import 'package:natv_kg/resources/resources.dart';
 
 import '../../../core_data/ui/common_widgets/channel_list_container.dart';
 import '../../../core_data/ui/common_widgets/circle_avatar_widget.dart';
+import '../../../core_data/ui/common_widgets/container_banner.dart';
+import '../../../core_data/ui/common_widgets/container_public.dart';
 import '../../../core_data/ui/common_widgets/container_succes_widget.dart';
 import '../../../core_data/ui/common_widgets/registation_textfield_widget.dart';
 import '../../banner_screen/ui/banner_screen.dart';
+import '../../registration_request_screen/ui/registration_screen.dart';
 import '../channel_list_bloc/channel_list_bloc.dart';
+import '../models/channel_list_models.dart';
 
 class AnnouncementScreen extends StatefulWidget {
   const AnnouncementScreen({super.key, this.day});
@@ -25,8 +30,16 @@ class AnnouncementScreen extends StatefulWidget {
   State<AnnouncementScreen> createState() => _AnnouncementScreenState();
 }
 
+List data = [];
+List<ChannelModel> defaultList = [];
+// List<ChannelModel> listDate = data;
+
+// ChanelListModel dateModel = data;
+
 class _AnnouncementScreenState extends State<AnnouncementScreen> {
   final textController = TextEditingController();
+  TextEditingController controllerID = TextEditingController();
+  TextEditingController controllerDay = TextEditingController();
   bool _expanded = true;
   int charLength = 0;
 
@@ -35,6 +48,8 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
       charLength = value.length;
     });
   }
+
+  Widget? list;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +63,9 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
     final _random = Random();
 
     var element = list[_random.nextInt(list.length)];
-    BlocProvider.of<RickMortyBloc>(context).add(GetRickMortyEvent());
+    Widget listChannel;
+    // BlocProvider.of<RickMortyBloc>(context).add(GetRickMortyEvent());
+    BlocProvider.of<ChannelListBloc>(context).add(GetChannelListEvent());
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -61,57 +78,8 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               ),
               Row(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        width: 200,
-                        height: 5,
-                        color: AppColors.red,
-                      ),
-                      SizedBox(
-                          width: 200,
-                          height: 50,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                backgroundColor: AppColors.white,
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                'Размещение строчного объявления',
-                                style: AppFonts.w400s14
-                                    .copyWith(color: AppColors.red),
-                              ))),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        width: 190,
-                        height: 5,
-                        color: AppColors.white,
-                      ),
-                      SizedBox(
-                          width: 190,
-                          height: 50,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                backgroundColor: AppColors.white,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => BannerScreen()));
-                              },
-                              child: Text(
-                                'Размещение баннерной рекламы',
-                                style: AppFonts.w400s14
-                                    .copyWith(color: AppColors.red),
-                              ))),
-                    ],
-                  ),
+                  ContainerPublic(),
+                  ContainerBanner(),
                 ],
               ),
               Padding(
@@ -130,7 +98,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'ВВЕДИТЕ ТЕКСТ ОБЪЯВЛЕНИЯ',
                         style: AppFonts.w100s14,
                       ),
@@ -184,52 +152,80 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    // const RegistrationTextField(
-                    //   title: 'сколько дней',
-                    //   number: '',
-                    // ),
+                    RegistrationTextField(
+                      textEditingController: controllerDay,
+                      title: 'Количесвто дней',
+                      number: '',
+                    ),
+                    RegistrationTextField(
+                      textEditingController: controllerID,
+                      title: 'ID Channel',
+                      number: '',
+                    ),
                     TextButton(
                         onPressed: () {
                           BlocProvider.of<CalculateBloc>(context).add(
                               GetCalculateEvent(
-                                  channelId: 2,
-                                  daysCount: widget.day ?? 0,
+                                  channelId: 9,
+                                  daysCount: 5,
                                   text: textController.text));
                         },
                         child: Text('success')),
                     BlocBuilder<CalculateBloc, CalculateState>(
                       builder: (context, state) {
                         if (state is CalculateSuccess) {
-                          print(state.data.price);
-                          return Text('${state.data.price}');
+                          print('Цена ${state.data.price}');
+                          return Text('${state.data.priceWithDiscount}');
                         }
-                        return SizedBox.shrink();
+                        return Text('error');
                       },
                     ),
-
                     AnimatedContainer(
                       duration: const Duration(microseconds: 500),
                       height: _expanded ? 300 : 750,
                       width: 500,
-                      child: BlocBuilder<RickMortyBloc, RickMortyState>(
+                      child: BlocBuilder<ChannelListBloc, ChannelListState>(
                           builder: (context, state) {
-                        if (state is RickMortySuccess) {
+                        // if (state is ChannelListInitial) {
+                        //   BlocProvider.of<ChannelListBloc>(context)
+                        //       .add(GetChannelListEvent());
+                        // }
+                        if (state is ChannelListSuccess) {
                           return ListView.builder(
                               shrinkWrap: true,
-                              itemCount: 15,
+                              itemCount: state.data.length,
                               itemBuilder: (context, index) =>
                                   ChannelListContainer(
-                                    range: widget.day.toString(),
+                                    price: state.data[index].pricePerLetter ?? 0,
+                                    id: state.data[index].id ?? 0,
                                     channelName:
-                                        state.model.results?[index].name ?? '',
-                                    logo:
-                                        state.model.results?[index].image ?? '',
-                                    id: state.model.results?[index].id ?? 0,
+                                        state.data[index].channelName ?? '',
+                                    // images: state.data[index].logo ?? '',
+                                    // title: '${state.data[index].id }',
+                                    // model: state.model,
+
+                                    child: Image.network(
+                                      'https://natv.kg/static/user/ima/logo.png',
+                                      // state.data[index].logo ?? '',
+                                      // state.data[index].logo == "" ||
+                                      //         state.data[index].logo == "string"
+                                      //     ? 'https://natv.kg/static/user/ima/logo.png'
+                                      //     : state.data[index].logo ??
+                                      //         'https://natv.kg/static/user/ima/logo.png',
+                                      height: 60,
+                                      width: 80,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    //   range: widget.day.toString(),
+                                    //   channelName:
+                                    //       state.data[index].channelName ?? '',
+                                    //   // logo: state.data[index].logo?[index] ?? '',
+                                    //   id: state.data[index].id ?? 0,
                                   ));
                         }
                         return const Center(
                           child: Text(
-                            'not found',
+                            'Произошла ошибка',
                             style: TextStyle(color: AppColors.red),
                           ),
                         );
@@ -285,29 +281,19 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               ),
               ContainerSuccesWidget(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Claculatetest()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegistrationRequest(
+                                simvol: charLength,
+                                textEditingController: textController,
+                              )));
                 },
                 title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
-              ),
+              )
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Claculatetest extends StatelessWidget {
-  const Claculatetest({super.key, this.price});
-
-  final int? price;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Center(child: Text('$price'))],
       ),
     );
   }

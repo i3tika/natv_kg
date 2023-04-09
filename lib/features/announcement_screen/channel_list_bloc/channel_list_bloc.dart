@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../models/channel_list_models.dart';
+import '../models/channels.dart';
 import '../models/rick_morte_models.dart';
 import '../repositories/channel_list_repo.dart';
 
@@ -18,14 +19,6 @@ class ChannelListBloc extends Bloc<ChannelListEvent, ChannelListState> {
         emit(ChannelListError());
       }
     });
-    // on<GetChannelListEvent>((event, emit) async {
-    //   try {
-    //     final model = await repo.getRickMorte();
-    //     emit(RickMorteSucces(model: model));
-    //   } catch (e) {
-    //     emit(ChannelListError());
-    //   }
-    // });
   }
   final GetChanelListRepo repo;
 }

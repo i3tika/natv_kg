@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
+import '../../../features/announcement_screen/models/models.dart';
 import '../theme/app_colors.dart';
 
 class ChannelListContainer extends StatefulWidget {
-  const ChannelListContainer({
+  ChannelListContainer({
     super.key,
-    required this.logo,
+    this.child,
     required this.channelName,
-    required this.id,
-    this.range,
+    this.id,
+    this.title,
+    this.model,
+    this.images, this.price,
   });
-  final String logo;
+  final Widget? child;
   final String channelName;
-  final int id;
-  final String? range;
+  final int? id;
+  final String? title;
+  final String? images;
+  final ChannelModel? model;
+  final double? price;
 
   @override
   State<ChannelListContainer> createState() => _ChannelListContainerState();
@@ -38,18 +44,18 @@ class _ChannelListContainerState extends State<ChannelListContainer> {
 
   DateTime dateTime = DateTime.now();
 
-  void _showDatePicker() {
-    showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(1999),
-            lastDate: DateTime(2030))
-        .then((value) {
-      setState(() {
-        dateTime = value!;
-      });
-    });
-  }
+  // void _showDatePicker() {
+  //   showDatePicker(
+  //           context: context,
+  //           initialDate: DateTime.now(),
+  //           firstDate: DateTime(1999),
+  //           lastDate: DateTime(2030))
+  //       .then((value) {
+  //     setState(() {
+  //       dateTime = value!;
+  //     });
+  //   });
+  // }
 
   DateTime day = DateTime.now();
   dayCounter() {
@@ -64,7 +70,6 @@ class _ChannelListContainerState extends State<ChannelListContainer> {
   }
 
   dateMulti() {
-    
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -74,23 +79,15 @@ class _ChannelListContainerState extends State<ChannelListContainer> {
             maxDate: DateTime.now().add(Duration(days: 365)),
             // view: DateRangePickerView.month,
             selectionMode: DateRangePickerSelectionMode.multiple,
-            // selectionMode: DateRangePickerSelectionMode.range,
-            // initialSelectedRange: PickerDateRange(_startDate, _endDate),
-            onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
-              // setState(() {
-              //   day = args.value.startDate;
-              //   _endDate = args.value.endDate;
-              // });
-            },
+            onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {},
           );
         });
-
   }
 
   @override
   Widget build(BuildContext context) {
     // var listDay = [].add(dateTime);
-      return SizedBox(
+    return SizedBox(
       width: 400,
       height: 150,
       child: Stack(
@@ -111,21 +108,31 @@ class _ChannelListContainerState extends State<ChannelListContainer> {
                           Radius.circular(10.0),
                         ),
                       ),
+                      // child: Column(children: [],),
                       child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Image.network(
-                          widget.logo,
-                          width: 250,
-                          height: 250,
-                        ),
-                      ),
+                          padding: EdgeInsets.all(18.0), child: widget.child
+                          //       //  widget.child,
+                          //   //     Image.network(
+                          //   //   widget.images,
+                          //   //   width: 250,
+                          //   //   height: 250,
+                          //   // ),
+                          ),
                     ),
                   ),
                   const SizedBox(
                     width: 15,
                   ),
-                  Text(widget.id.toString()),
+                  Text("${widget.id}"),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text('${widget.price}'),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Text(
+                    // '${widget.id}',
                     widget.channelName,
                     style: const TextStyle(fontSize: 15),
                   ),

@@ -86,12 +86,6 @@ class _BannerScreenState extends State<BannerScreen> {
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: AppColors.white,
-                                // shape:const RoundedRectangleBorder(
-                                // side: BorderSide(
-                                //   width: 2,
-                                //   color: AppColors.white,
-                                // ),
-                                // ),
                               ),
                               onPressed: () {
                                 Navigator.push(

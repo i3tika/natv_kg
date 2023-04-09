@@ -8,7 +8,7 @@ class DioSettings {
 
   Dio dio = Dio(
     BaseOptions(
-      baseUrl: '',
+      baseUrl: 'https://app1.megacom.kg:9090/test_task/',
       contentType: 'application/json',
       headers: {'Accept': 'application/json'},
       connectTimeout: const Duration(seconds: 20),

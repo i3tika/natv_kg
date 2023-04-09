@@ -6,5 +6,6 @@ import 'package:natv_kg/resources/resources.dart';
 void main() {
   test('app_images assets test', () {
     expect(File(AppImages.logo).existsSync(), true);
+    expect(File(AppImages.vm).existsSync(), true);
   });
 }

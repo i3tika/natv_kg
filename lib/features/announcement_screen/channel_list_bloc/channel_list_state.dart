@@ -7,11 +7,9 @@ class ChannelListInitial extends ChannelListState {}
 
 class ChannelListSuccess extends ChannelListState {
   ChannelListSuccess({required this.data});
-  final List<ChanelListModel> data;
+  final List<Channel> data;
+
+  // get model => null;
 }
 
-// class RickMorteSucces extends ChannelListState {
-//   final RickandMortyModel model;
-//   RickMorteSucces({required this.model});
-// }
 class ChannelListError extends ChannelListState {}

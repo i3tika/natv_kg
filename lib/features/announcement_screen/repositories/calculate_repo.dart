@@ -8,7 +8,7 @@ class CalculateRepo {
 
   Future<CalculateModels> calculateRepositories({
     required String text,
-    required int daysCount,
+    required double daysCount,
     required int channelId,
   }) async {
     final response = await dio.get(
