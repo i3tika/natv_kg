@@ -20,7 +20,7 @@ import '../channel_list_bloc/channel_list_bloc.dart';
 class AnnouncementScreen extends StatefulWidget {
   const AnnouncementScreen({super.key, this.day});
 
-final int? day;
+  final int? day;
   @override
   State<AnnouncementScreen> createState() => _AnnouncementScreenState();
 }
@@ -193,7 +193,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                           BlocProvider.of<CalculateBloc>(context).add(
                               GetCalculateEvent(
                                   channelId: 2,
-                                  daysCount: widget.day??0,
+                                  daysCount: widget.day ?? 0,
                                   text: textController.text));
                         },
                         child: Text('success')),
@@ -206,7 +206,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                         return SizedBox.shrink();
                       },
                     ),
-                    
+
                     AnimatedContainer(
                       duration: const Duration(microseconds: 500),
                       height: _expanded ? 300 : 750,
@@ -225,12 +225,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                                     logo:
                                         state.model.results?[index].image ?? '',
                                     id: state.model.results?[index].id ?? 0,
-                                  )
-                              //  ChannelList(
-                              //     name: state.model.results?[index].name ?? '',
-                              //     images:
-                              //         state.model.results?[index].image ?? '')
-                              );
+                                  ));
                         }
                         return const Center(
                           child: Text(
@@ -288,35 +283,13 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               const SizedBox(
                 height: 10,
               ),
-              // BlocBuilder<CalculateBloc, CalculateState>(
-              //   builder: (context, state) {
-              //     if (state is CalculateSuccess) {
-              //       return ContainerSuccesWidget(
-              //         onPressed: () {
-              //           Navigator.push(
-              //               context,
-              //               MaterialPageRoute(
-              //                   builder: (context) => Claculatetest(
-              //                         price: state.data.price ?? 0,
-              //                       )));
-              //         },
-              //         title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
-              //       );
-              //     }
-              //     return Text('ds');
-              //   },
-              // ),
               ContainerSuccesWidget(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Claculatetest(
-                                      
-                                    )));
-                      },
-                      title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
-                    ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Claculatetest()));
+                },
+                title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
+              ),
             ],
           ),
         ),
