@@ -11,8 +11,8 @@ class RickMortyBloc extends Bloc<RickMortyEvent, RickMortyState> {
   RickMortyBloc({required this.repo}) : super(RickMortyInitial()) {
     on<GetRickMortyEvent>((event, emit) async {
       try {
-        final model = await repo.getRickMorte();
-        emit(RickMortySuccess(model: model));
+        final models = await repo.getRickMorte();
+        emit(RickMortySuccess(model: models));
       } catch (e) {
         emit(RickMortyError());
       }

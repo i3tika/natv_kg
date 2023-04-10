@@ -18,8 +18,9 @@ import '../../banner_screen/ui/banner_screen.dart';
 import '../channel_list_bloc/channel_list_bloc.dart';
 
 class AnnouncementScreen extends StatefulWidget {
-  const AnnouncementScreen({super.key});
+  const AnnouncementScreen({super.key, this.day});
 
+final int? day;
   @override
   State<AnnouncementScreen> createState() => _AnnouncementScreenState();
 }
@@ -74,12 +75,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: AppColors.white,
-                                // shape:const RoundedRectangleBorder(
-                                // side: BorderSide(
-                                //   width: 2,
-                                //   color: AppColors.white,
-                                // ),
-                                // ),
                               ),
                               onPressed: () {},
                               child: Text(
@@ -103,12 +98,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: AppColors.white,
-                                // shape:const RoundedRectangleBorder(
-                                // side: BorderSide(
-                                //   width: 2,
-                                //   color: AppColors.white,
-                                // ),
-                                // ),
                               ),
                               onPressed: () {
                                 Navigator.push(
@@ -131,11 +120,6 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   AppImages.logo,
                 ),
               ),
-              // Image.asset(
-              //   AppImages.logo,
-              //   width: 100,
-              //   height: 100,
-              // ),
               Center(
                 child: Container(
                   width: 390,
@@ -197,29 +181,32 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                       title: 'Оплатите объявление!',
                       intNumber: '3',
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     // const RegistrationTextField(
                     //   title: 'сколько дней',
                     //   number: '',
                     // ),
-                    // TextButton(
-                    //     onPressed: () {
-                    //       BlocProvider.of<CalculateBloc>(context).add(
-                    //           GetCalculateEvent(
-                    //               channelId: 2,
-                    //               daysCount: 5,
-                    //               text: textController.text));
-                    //     },
-                    //     child: Text('success')),
-                    // BlocBuilder<CalculateBloc, CalculateState>(
-                    //   builder: (context, state) {
-                    //     if (state is CalculateSuccess) {
-                    //       print(state.data.price);
-                    //       return Text(state.data.price.toString());
-                    //     }
-                    //     return SizedBox.shrink();
-                    //   },
-                    // ),
+                    TextButton(
+                        onPressed: () {
+                          BlocProvider.of<CalculateBloc>(context).add(
+                              GetCalculateEvent(
+                                  channelId: 2,
+                                  daysCount: widget.day??0,
+                                  text: textController.text));
+                        },
+                        child: Text('success')),
+                    BlocBuilder<CalculateBloc, CalculateState>(
+                      builder: (context, state) {
+                        if (state is CalculateSuccess) {
+                          print(state.data.price);
+                          return Text('${state.data.price}');
+                        }
+                        return SizedBox.shrink();
+                      },
+                    ),
+                    
                     AnimatedContainer(
                       duration: const Duration(microseconds: 500),
                       height: _expanded ? 300 : 750,
@@ -232,6 +219,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                               itemCount: 15,
                               itemBuilder: (context, index) =>
                                   ChannelListContainer(
+                                    range: widget.day.toString(),
                                     channelName:
                                         state.model.results?[index].name ?? '',
                                     logo:
@@ -300,12 +288,53 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               const SizedBox(
                 height: 10,
               ),
+              // BlocBuilder<CalculateBloc, CalculateState>(
+              //   builder: (context, state) {
+              //     if (state is CalculateSuccess) {
+              //       return ContainerSuccesWidget(
+              //         onPressed: () {
+              //           Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                   builder: (context) => Claculatetest(
+              //                         price: state.data.price ?? 0,
+              //                       )));
+              //         },
+              //         title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
+              //       );
+              //     }
+              //     return Text('ds');
+              //   },
+              // ),
               ContainerSuccesWidget(
-                title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
-              ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Claculatetest(
+                                      
+                                    )));
+                      },
+                      title: 'РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
+                    ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class Claculatetest extends StatelessWidget {
+  const Claculatetest({super.key, this.price});
+
+  final int? price;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [Center(child: Text('$price'))],
       ),
     );
   }

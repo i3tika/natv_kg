@@ -4,9 +4,10 @@ import '../theme/app_colors.dart';
 
 class ContainerSuccesWidget extends StatelessWidget {
   const ContainerSuccesWidget({
-    super.key, required this.title,
+    super.key, required this.title, this.onPressed,
   });
   final String title;
+  final Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +36,7 @@ class ContainerSuccesWidget extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
                       backgroundColor: AppColors.white),
-                  onPressed: () {},
+                  onPressed:onPressed,
                   child: Text(
                     title,
                     style: TextStyle(color: AppColors.red),
